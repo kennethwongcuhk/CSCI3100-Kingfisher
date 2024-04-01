@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/CSCI3100-Kingfisher/static/css/main.f855e6bc.css",
+    "main.js": "/CSCI3100-Kingfisher/static/js/main.14e4f632.js",
+    "static/js/453.d93027cb.chunk.js": "/CSCI3100-Kingfisher/static/js/453.d93027cb.chunk.js",
+    "static/media/KGF.png": "/CSCI3100-Kingfisher/static/media/KGF.dbcfc3a78dbac6622ac7.png",
+    "index.html": "/CSCI3100-Kingfisher/index.html",
+    "main.f855e6bc.css.map": "/CSCI3100-Kingfisher/static/css/main.f855e6bc.css.map",
+    "main.14e4f632.js.map": "/CSCI3100-Kingfisher/static/js/main.14e4f632.js.map",
+    "453.d93027cb.chunk.js.map": "/CSCI3100-Kingfisher/static/js/453.d93027cb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.14e4f632.js"
+  ]
+}
