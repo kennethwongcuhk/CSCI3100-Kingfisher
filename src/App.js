@@ -17,6 +17,9 @@ function App() {
         >
           Kingfisher
         </a>
+        <p>
+        The first step.
+        </p>
       </header>
     </div>
   );
