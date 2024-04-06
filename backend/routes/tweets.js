@@ -1,4 +1,5 @@
 const express = require('express');
+const Tweet = require('../models/TweetModel')
 
 const router = express.Router();
 
@@ -10,8 +11,14 @@ router.get('/:id', (req, res) => {
     res.json({mssg: 'one tweet'});
 });
 
-router.post('/', (req, res) => {
-    res.json({mssg: 'post new tweet'});
+router.post('/', async (req, res) => {
+    const {content} = req.body;
+    try {
+        const tweet = await Tweet.create({content});
+        res.status(200).json(tweet)
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 });
 
 router.delete('/', (req, res) => {
