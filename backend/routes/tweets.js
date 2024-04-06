@@ -1,25 +1,17 @@
 const express = require('express');
-const Tweet = require('../models/TweetModel')
+const {
+    getTweets,
+    getTweet,
+    createTweet,
+} = require('../controllers/tweetController')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({mssg: 'all tweets'});
-});
+router.get('/', getTweets);
 
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'one tweet'});
-});
+router.get('/:id', getTweet);
 
-router.post('/', async (req, res) => {
-    const {content} = req.body;
-    try {
-        const tweet = await Tweet.create({content});
-        res.status(200).json(tweet)
-    } catch (error) {
-        res.status(400).json({error: error.message});
-    }
-});
+router.post('/', createTweet);
 
 router.delete('/', (req, res) => {
     res.json({mssg: 'delete tweet'});
