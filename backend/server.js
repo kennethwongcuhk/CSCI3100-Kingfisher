@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const express = require('express');
-const tweetRoutes = require('./routes/tweets')
+const mongoose = require('mongoose');
+const tweetRoutes = require('./routes/tweets');
 
 const app = express();
 
@@ -14,6 +15,12 @@ app.use((req, res, next) => {
 
 app.use('/api/tweets', tweetRoutes)
 
-app.listen(process.env.PORT, () => {
-    console.log('listening on port 4000');
-});
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log('connected to mongodb & listening on port', process.env.PORT);
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });
