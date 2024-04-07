@@ -32,8 +32,21 @@ const createTweet = async (req, res) => {
     }
 }
 
+const deleteTweet = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such tweet'})
+    }
+    const tweet = await Tweet.findByIdAndDelete(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such tweet'})
+    }
+    res.status(200).json(tweet);
+}
+
 module.exports = {
     getTweets,
     getTweet,
     createTweet,
+    deleteTweet,
 }

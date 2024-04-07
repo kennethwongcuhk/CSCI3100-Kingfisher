@@ -3,6 +3,7 @@ const {
     getTweets,
     getTweet,
     createTweet,
+    deleteTweet,
 } = require('../controllers/tweetController')
 
 const router = express.Router();
@@ -13,8 +14,6 @@ router.get('/:id', getTweet);
 
 router.post('/', createTweet);
 
-router.delete('/', (req, res) => {
-    res.json({mssg: 'delete tweet'});
-});
+router.delete('/:id', deleteTweet);
 
 module.exports = router;
