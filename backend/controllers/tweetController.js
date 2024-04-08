@@ -25,7 +25,8 @@ const getTweet = async (req, res) => {
 const createTweet = async (req, res) => {
     const {content} = req.body;
     try {
-        const tweet = await Tweet.create({content});
+        const user_id = req.user._id;
+        const tweet = await Tweet.create({content, user_id});
         res.status(200).json(tweet)
     } catch (error) {
         res.status(400).json({error: error.message});
