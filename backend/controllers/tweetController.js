@@ -38,8 +38,9 @@ const deleteTweet = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such tweet'})
     }
-    const tweet = await Tweet.findByIdAndDelete(id);
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    const user_id = req.user._id;
+    const tweet = await Tweet.findOneAndDelete({_id:id, user_id});
+    if (!tweet) {
         return res.status(404).json({error: 'No such tweet'})
     }
     res.status(200).json(tweet);
