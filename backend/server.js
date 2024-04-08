@@ -7,6 +7,7 @@ const userRoutes = require('./routes/user');
 const relationRoutes = require('./routes/relation');
 const reactionRoutes = require('./routes/reaction');
 const retweetRoutes = require('./routes/retweet');
+const commentRoutes = require('./routes/comment');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/relation', relationRoutes);
 app.use('/api/reaction', reactionRoutes);
 app.use('/api/retweet', retweetRoutes);
+app.use('/api/comment', commentRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
