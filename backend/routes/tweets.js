@@ -2,6 +2,7 @@ const express = require('express');
 const {
     getTweets,
     getTweet,
+    getUserTweets,
     createTweet,
     deleteTweet,
 } = require('../controllers/tweetController')
@@ -14,6 +15,8 @@ router.use(requireAuth);
 router.get('/', getTweets);
 
 router.get('/:id', getTweet);
+
+router.get('/user/:id', getUserTweets);
 
 router.post('/', createTweet);
 
