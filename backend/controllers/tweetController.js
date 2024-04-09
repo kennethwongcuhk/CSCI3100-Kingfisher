@@ -1,5 +1,6 @@
 const Tweet = require('../models/TweetModel');
 const User = require('../models/userModel');
+const Relation = require('../models/relationModel');
 const Reaction = require('../models/reactionModel');
 const Retweet = require('../models/retweetModel');
 const Comment = require('../models/commentModel');
@@ -8,6 +9,23 @@ const mongoose = require('mongoose');
 const getTweets = async (req, res) => {
     try {
         const tweets = await Tweet.find({}).sort({createdAt: -1});
+        res.status(200).json(tweets);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+const getRecommendedTweets = async (req, res) => {
+    try {
+        const user_id = req.user._id;
+        const following = (await Relation.find({follower:user_id})
+            .select({following:1, _id:0}))
+            .map(obj => obj.following);
+        let tweets = await Tweet.find({}).sort({createdAt: -1});
+        const user = await User.findById(user_id);
+        if (!user.isAdmin) {
+            tweets = tweets.filter(tweet => following.includes(tweet.user_id) || tweet.user_id == user_id);
+        }
         res.status(200).json(tweets);
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -80,6 +98,7 @@ const deleteTweet = async (req, res) => {
 
 module.exports = {
     getTweets,
+    getRecommendedTweets,
     getTweet,
     getUserTweets,
     createTweet,

@@ -1,6 +1,7 @@
 const express = require('express');
 const {
     getTweets,
+    getRecommendedTweets,
     getTweet,
     getUserTweets,
     createTweet,
@@ -13,6 +14,8 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get('/', getTweets);
+
+router.get('/recommended', getRecommendedTweets);
 
 router.get('/:id', getTweet);
 
