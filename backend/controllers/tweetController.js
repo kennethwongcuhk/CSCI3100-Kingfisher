@@ -1,4 +1,5 @@
 const Tweet = require('../models/TweetModel');
+const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
 const getTweets = async (req, res) => {
@@ -39,11 +40,22 @@ const deleteTweet = async (req, res) => {
         return res.status(404).json({error: 'No such tweet'})
     }
     const user_id = req.user._id;
-    const tweet = await Tweet.findOneAndDelete({_id:id, user_id});
-    if (!tweet) {
-        return res.status(404).json({error: 'No such tweet'})
+    const user = await User.findById(user_id);
+    if (user.isAdmin) {
+        const tweet = await Tweet.findByIdAndDelete(id);
+        if (!tweet) {
+            return res.status(404).json({error: 'No such tweet'})
+        }
+        res.status(200).json(tweet);
+    } else {
+        const tweet = await Tweet.findOneAndDelete({_id:id, user_id});
+        if (!tweet) {
+            return res.status(404).json({error: 'No such tweet'})
+        }
+        res.status(200).json(tweet);
     }
-    res.status(200).json(tweet);
+    
+    
 }
 
 module.exports = {

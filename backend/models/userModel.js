@@ -19,10 +19,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+    }
 });
 
-userSchema.statics.signup = async function(email, username, password) {
-    if (!email || !username || !password) {
+userSchema.statics.signup = async function(email, username, password, invite_code) {
+    if (!email || !username || !password || !invite_code) {
         throw Error('All fields must be filled');
     }
     if (!validator.isEmail(email)) {
@@ -36,9 +40,13 @@ userSchema.statics.signup = async function(email, username, password) {
     if (username_exists) {
         throw Error('Username already in use.');
     }
+    if (invite_code !== process.env.INVITE_NORMAL && invite_code !== process.env.INVITE_ADMIN) {
+        throw Error('Incorrect invite code.');
+    }
+    const isAdmin = invite_code === process.env.INVITE_ADMIN
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    const user = await this.create({ email, username, password: hash });
+    const user = await this.create({ email, username, password: hash, isAdmin});
 
     return user;
 }
