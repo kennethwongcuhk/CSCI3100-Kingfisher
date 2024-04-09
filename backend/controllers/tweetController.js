@@ -1,5 +1,8 @@
 const Tweet = require('../models/TweetModel');
 const User = require('../models/userModel');
+const Reaction = require('../models/reactionModel');
+const Retweet = require('../models/retweetModel');
+const Comment = require('../models/commentModel');
 const mongoose = require('mongoose');
 
 const getTweets = async (req, res) => {
@@ -20,7 +23,11 @@ const getTweet = async (req, res) => {
     if (!tweet) {
         return res.status(404).json({error: 'No such tweet'})
     }
-    res.status(404).json(tweet);
+    const likes = await Reaction.find({tweet:id, isLike:true}).countDocuments();
+    const dislikes = await Reaction.find({tweet:id, isLike:false}).countDocuments();
+    const retweets = await Retweet.find({tweet:id}).countDocuments();
+    const comments = await Comment.find({tweet:id}).countDocuments();
+    res.status(404).json({tweet, likes, dislikes, retweets, comments});
 }
 
 const createTweet = async (req, res) => {
