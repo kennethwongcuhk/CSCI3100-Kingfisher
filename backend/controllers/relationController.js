@@ -14,6 +14,9 @@ const followUser = async (req, res) => {
 
     try {
         const follower = req.user._id;
+        if (follower == id) {
+            return res.status(400).json({error: 'Cannot follow yourself'});
+        }
         const relation_exists = await Relation.findOne({follower, following:id});
         if (relation_exists) {
             return res.status(400).json({error: 'Following already'});
@@ -37,6 +40,9 @@ const unfollowUser = async (req, res) => {
     
     try {
         const follower = req.user._id;
+        if (follower == id) {
+            return res.status(400).json({error: 'Cannot unfollow yourself'});
+        }
         const relation = await Relation.findOneAndDelete({follower, following:id});
         if (!relation) {
             return res.status(400).json({error: 'Not following'});
