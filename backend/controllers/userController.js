@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const Relation = require('../models/relationModel');
 const jwt = require('jsonwebtoken');
 
 const createToken = (_id) => {
@@ -27,7 +28,22 @@ const signupUser = async (req, res) => {
     }
 }
 
+const getUserInfo = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        const username = user.username;
+        const follower = await Relation.find({following:id}).countDocuments();
+        const following = await Relation.find({follower:id}).countDocuments();
+        console.log(follower);
+        res.status(200).json({username, id, follower, following})
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
 module.exports = {
     loginUser,
     signupUser,
+    getUserInfo,
 }

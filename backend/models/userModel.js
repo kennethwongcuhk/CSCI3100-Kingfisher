@@ -23,7 +23,7 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
     }
-});
+}, {timestamps: true});
 
 userSchema.statics.signup = async function(email, username, password, invite_code) {
     if (!email || !username || !password || !invite_code) {
