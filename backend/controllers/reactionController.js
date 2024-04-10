@@ -1,5 +1,6 @@
 const Reaction = require('../models/reactionModel');
 const Tweet = require('../models/TweetModel');
+const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
 const likeTweet = async (req, res) => {
@@ -13,12 +14,14 @@ const likeTweet = async (req, res) => {
     }
 
     try {
-        const reactor = req.user._id;
-        const reaction_exists = await Reaction.findOneAndUpdate({reactor, tweet:id}, {isLike:true}, {new:true});
+        const user_id = req.user._id;
+        const user = await User.findById(user_id);
+        const username = user.username;
+        const reaction_exists = await Reaction.findOneAndUpdate({user_id, tweet:id}, {isLike:true}, {new:true});
         if (reaction_exists) {
             return res.status(200).json(reaction_exists);
         }
-        const reaction = await Reaction.create({reactor, tweet:id, isLike:true});
+        const reaction = await Reaction.create({user_id, username, tweet:id, isLike:true});
         res.status(200).json(reaction)
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -36,12 +39,14 @@ const dislikeTweet = async (req, res) => {
     }
 
     try {
-        const reactor = req.user._id;
-        const reaction_exists = await Reaction.findOneAndUpdate({reactor, tweet:id}, {isLike:false}, {new:true});
+        const user_id = req.user._id;
+        const user = await User.findById(user_id);
+        const username = user.username;
+        const reaction_exists = await Reaction.findOneAndUpdate({user_id, tweet:id}, {isLike:false}, {new:true});
         if (reaction_exists) {
             return res.status(200).json(reaction_exists);
         }
-        const reaction = await Reaction.create({reactor, tweet:id, isLike:false});
+        const reaction = await Reaction.create({user_id, username, tweet:id, isLike:false});
         res.status(200).json(reaction)
     } catch (error) {
         res.status(400).json({error: error.message});
