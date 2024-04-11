@@ -6,6 +6,7 @@ import UserList from "../components/UserList"
 // import NewTweet from "../components/NewTweet";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
+import { Link, NavLink, useNavigate } from 'react-router-dom';
   
 const User = () => {
     const [ users, setUsers] = useState(null)
@@ -62,7 +63,11 @@ const User = () => {
                     <div>
                         <div>_id: {user._id}</div>
                         <div>email: {user.email}</div>
-                        <div>username: {user.username}</div>
+                        <div>username:
+                            <Link to={`/user/${user.username}`}>
+                                <span> @{user.username}</span>
+                            </Link>
+                        </div>
                         <div>status: {user.isAdmin ? 'Admin' : 'Normal'}</div>
                     </div>
                     <button onClick={() =>{handleDelete(user._id)}}>Delete User</button>

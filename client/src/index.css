@@ -558,6 +558,10 @@ footer {
   display: flex;
   flex-direction: column;
 }
+.oneuser a {
+  text-decoration: none;
+  color: var(--gray);
+}
 .oneuser {
   width: 100%;
   padding: 10px;
