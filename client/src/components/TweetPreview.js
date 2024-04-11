@@ -49,7 +49,7 @@ const TweetPreview = ({ tweet }) => {
             <span className="time">{formatDistanceToNowStrict(new Date(tweet.createdAt))}</span>
           </Link>
           <div className="delete-button">
-            {(user.username === tweet.username || user.isAdmin) && (<span><i onClick={handleClick} className="bi bi-trash"></i></span>)}
+            {(user.username === tweet.username || !!!user.isAdmin) && (<span><i onClick={handleClick} className="bi bi-trash"></i></span>)}
           </div>
         </div>
         <div className="tweet-content"

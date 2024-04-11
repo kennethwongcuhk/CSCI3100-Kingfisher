@@ -136,7 +136,7 @@ const Tweet = () => {
             </Link>
           </div>  
           <div className="delete-button">
-            {(user.username === tweet.tweet.username || user.isAdmin) && (<span><i onClick={handleClick} className="bi bi-trash"></i></span>)}
+            {(user.username === tweet.tweet.username || !!!user.isAdmin) && (<span><i onClick={handleClick} className="bi bi-trash"></i></span>)}
           </div>
         </div>
         <div className="tweet-content">
