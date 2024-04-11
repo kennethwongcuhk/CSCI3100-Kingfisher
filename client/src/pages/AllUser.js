@@ -56,13 +56,15 @@ const User = () => {
 
 
     return ( 
-        <div className="users">
+        <div className="allusers">
             {users && users.map((user) => (
                 <div className="oneuser">
-                    <div>_id: {user._id}</div>
-                    <div>email: {user.email}</div>
-                    <div>username: {user.username}</div>
-                    <div>status: {user.isAdmin ? 'Admin' : 'Normal'}</div>
+                    <div>
+                        <div>_id: {user._id}</div>
+                        <div>email: {user.email}</div>
+                        <div>username: {user.username}</div>
+                        <div>status: {user.isAdmin ? 'Admin' : 'Normal'}</div>
+                    </div>
                     <button onClick={() =>{handleDelete(user._id)}}>Delete User</button>
                 </div>
             ))}

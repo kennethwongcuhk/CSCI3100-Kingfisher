@@ -130,8 +130,11 @@ const User = () => {
             <UserList user={user}/>
           ))}
           </div>
-          <button onClick={handleFollow}>Follow</button>
-          <button onClick={handleUnfollow}>Unfollow</button>
+          <div className="follows">
+            <button onClick={handleFollow}>Follow</button>
+            <button onClick={handleUnfollow}>Unfollow</button>
+          </div>
+
 
       </div>
       <div className="tweets">
