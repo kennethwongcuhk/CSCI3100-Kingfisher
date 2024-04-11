@@ -534,8 +534,12 @@ footer {
   margin-left: auto;
   cursor: pointer;
 }
+.user-info {
+  padding: 10px;
+}
 .user {
   display: flex;
+  flex-direction: column;
 }
 .oneuser {
   margin: 10px;
