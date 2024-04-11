@@ -589,3 +589,6 @@ footer {
   margin-left: auto;
   cursor: pointer;
 }
+.searchbar {
+  margin-top: 10px;
+}

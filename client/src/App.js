@@ -10,6 +10,7 @@ import Signup from './pages/Signup';
 import Tweet from './pages/Tweet';
 import User from './pages/User';
 import AllUser from './pages/AllUser';
+import Search from './pages/Search';
 
 function App() {
   const { user } = useAuthContext()
@@ -44,6 +45,10 @@ function App() {
             <Route
               path="/user/:username"
               element={<User />}
+            />
+            <Route
+              path="/search"
+              element={<Search />}
             />
           </Routes>
         </div>

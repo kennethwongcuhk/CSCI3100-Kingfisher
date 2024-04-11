@@ -39,10 +39,10 @@ const Navbar = () => {
             <i className="bi bi-house-door"></i
             ><span>Home</span>
           </NavLink>
-          <Link to="/">
+          <NavLink to="/search">
             <i className="bi bi-search"></i>
             <span>Search</span>
-          </Link>
+          </NavLink>
           <NavLink to={user ? `user/${user.username}` : "/"}>
             <i className="bi bi-person"></i>
             <span>Profile</span>

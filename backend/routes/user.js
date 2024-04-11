@@ -3,6 +3,7 @@ const {
     loginUser,
     signupUser,
     getAllUser,
+    getAllUserSearch,
     getUserInfo,
     deleteUser,
 } = require('../controllers/userController')
@@ -18,6 +19,8 @@ const requireAuth = require('../middleware/requireAuth');
 router.use(requireAuth);
 
 router.get('/', getAllUser);
+
+router.get('/search', getAllUserSearch);
 
 router.get('/info/:id', getUserInfo);
 

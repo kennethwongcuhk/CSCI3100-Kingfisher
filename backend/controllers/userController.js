@@ -43,6 +43,23 @@ const getAllUser = async (req, res) => {
     }
 }
 
+const getAllUserSearch = async (req, res) => {
+    try {
+        // const user_id = req.user._id;
+        // const user = await User.findById(user_id);
+        // if (!user.isAdmin) {
+        //     return res.status(400).json({error: 'not admin.'});
+        // }
+        let users = (await User.find({}).sort({createdAt: -1}));
+        // console.log(users);
+        users = users.map(({username, _id}) => ({username, _id}));
+        // console.log(users);
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
 const getUserInfo = async (req, res) => {
     const { id } = req.params;
     try {
@@ -90,6 +107,7 @@ module.exports = {
     loginUser,
     signupUser,
     getAllUser,
+    getAllUserSearch,
     getUserInfo,
     deleteUser,
 }
