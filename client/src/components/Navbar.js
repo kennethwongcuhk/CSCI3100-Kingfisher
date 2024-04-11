@@ -30,7 +30,7 @@ const Navbar = () => {
     <header>
       <div className="container">
         <Link to="/" onClick={goToTop}>
-          <i className="logo bi bi-trash"></i>
+          <i className="logo bi bi-feather"></i>
           {/* <img className="logo" src={logo} alt="logo" /> */}
           {/* <span className='logo'>X</span> */}
         </Link>
