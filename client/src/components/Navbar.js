@@ -49,7 +49,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/user/list">
             <i className="bi bi-person-gear"></i>
-            <span>Search</span>
+            <span>Users</span>
           </NavLink>
         </nav>
         <div className='themes'>
