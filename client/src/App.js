@@ -47,7 +47,7 @@ function App() {
             />
           </Routes>
         </div>
-        {user && <footer><div className="dummy-footer">testing123</div></footer>}
+        {user && <footer><div className="dummy-footer"></div></footer>}
       </BrowserRouter>
     </div>
   );
